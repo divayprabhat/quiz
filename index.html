@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Engineering Physics Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options input {
+            margin-right: 8px;
+        }
+        button {
+            padding: 10px 20px;
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Engineering Physics Quiz<br>(Electrostatics, Magnetostatics & Vector Calculus)</h2>
+        <form id="quizForm">
+            <div id="quiz"></div>
+            <div style="text-align:center; margin-top:20px;">
+                <button type="button" onclick="checkAnswers()">Submit</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "1. What is the SI unit of electric field?", options: ["N/C", "Coulomb", "Volt", "Ampere"], answer: "N/C" },
+            { q: "2. Gauss’s Law relates electric flux through a closed surface to?", options: ["Charge enclosed", "Electric potential", "Magnetic flux", "Current density"], answer: "Charge enclosed" },
+            { q: "3. Divergence of a magnetic field is always?", options: ["Zero", "Constant", "Infinite", "Charge dependent"], answer: "Zero" },
+            { q: "4. Which vector calculus operator is used in Gauss’s Law for electricity?", options: ["Gradient", "Divergence", "Curl", "Line integral"], answer: "Divergence" },
+            { q: "5. Electric potential is the __________ of electric field.", options: ["Divergence", "Curl", "Gradient", "Integral"], answer: "Integral" },
+            { q: "6. Which law states that the line integral of B around a closed loop equals μ₀ times current enclosed?", options: ["Gauss’s Law", "Faraday’s Law", "Ampere’s Law", "Coulomb’s Law"], answer: "Ampere’s Law" },
+            { q: "7. Laplace’s equation in electrostatics is?", options: ["∇²V = 0", "∇·E = ρ/ε₀", "∇×E = 0", "∇·B = 0"], answer: "∇²V = 0" },
+            { q: "8. The Biot-Savart law gives the magnetic field due to?", options: ["A point charge", "A current element", "An electric dipole", "A solenoid"], answer: "A current element" },
+            { q: "9. Which of the following is a solenoidal field?", options: ["Electric field", "Magnetic field", "Scalar potential", "Electrostatic force"], answer: "Magnetic field" },
+            { q: "10. Gradient of potential gives?", options: ["Force", "Electric field", "Charge", "Magnetic field"], answer: "Electric field" },
+            { q: "11. The potential at a point due to a dipole depends on?", options: ["1/r", "1/r^2", "1/r^3", "1/r^4"], answer: "1/r^2" },
+            { q: "12. The work done in moving a test charge in a conservative electric field depends on?", options: ["Path taken", "Initial and final points", "Medium permittivity", "Magnitude of charge only"], answer: "Initial and final points" },
+            { q: "13. A vector field with zero divergence is called?", options: ["Irrotational", "Solenoidal", "Conservative", "Harmonic"], answer: "Solenoidal" },
+            { q: "14. The curl of the gradient of any scalar field is?", options: ["Zero", "Constant", "Divergence", "Potential"], answer: "Zero" },
+            { q: "15. Which of the following correctly represents Poisson’s equation?", options: ["∇²V = ρ/ε₀", "∇²V = 0", "∇·E = 0", "∇×B = μ₀J"], answer: "∇²V = ρ/ε₀" },
+            { q: "16. The force between two parallel current-carrying conductors is due to?", options: ["Electric field", "Magnetic field", "Scalar potential", "Electrostatic attraction"], answer: "Magnetic field" },
+            { q: "17. Which of the following is dimensionally equivalent to magnetic flux?", options: ["Volt·second", "Newton·meter", "Joule·second", "Weber/m²"], answer: "Volt·second" },
+            { q: "18. In electrostatics, ∇×E = ?", options: ["ρ/ε₀", "0", "J", "-∂B/∂t"], answer: "0" },
+            { q: "19. If ∇·A = 0 and ∇×A = 0, then vector field A is?", options: ["Conservative only", "Solenoidal only", "Both Conservative and Solenoidal", "None of these"], answer: "Both Conservative and Solenoidal" },
+            { q: "20. The magnetic vector potential A is defined such that?", options: ["B = ∇×A", "E = -∇A", "A = ∇·B", "A = ∇×B"], answer: "B = ∇×A" }
+        ];
+
+        const quizDiv = document.getElementById("quiz");
+
+        questions.forEach((q, i) => {
+            let qDiv = document.createElement("div");
+            qDiv.classList.add("question");
+            qDiv.innerHTML = `<p><b>${q.q}</b></p>`;
+            q.options.forEach(opt => {
+                qDiv.innerHTML += `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label><br>`;
+            });
+            quizDiv.appendChild(qDiv);
+        });
+
+        function checkAnswers() {
+            let score = 0;
+            questions.forEach((q, i) => {
+                let selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected && selected.value === q.answer) {
+                    score++;
+                }
+            });
+            document.getElementById("result").innerHTML = `Your Score: ${score} / ${questions.length}`;
+        }
+    </script>
+</body>
+</html>
